@@ -49,7 +49,7 @@ def draw_landmarks_on_image(rgb_image, detection_result):
 # cv2.imshow("image",img)
 # cv2.waitKey(0)
 # cv2.imwrite("Cropped_ISL1.jpg",img)
-dir = "C:/Projects/ISL Research/0-9/"
+dir = "C:/Projects/ISL-to-text/0-9"
 
 for x in os.listdir(dir):
     image_path = dir+x+"/"+os.listdir(dir+x)[0]
@@ -59,7 +59,7 @@ for x in os.listdir(dir):
     cv2.imshow("image",img)
     cv2.waitKey(0)
     cv2.imwrite(image_path+"_crop.jpg",img)
-    base_options = python.BaseOptions(model_asset_path= "C:/Projects/ISL Research/hand_landmarker.task")
+    base_options = python.BaseOptions(model_asset_path= "C:/Projects/ISL-to-text/hand_landmarker.task")
     options = vision.HandLandmarkerOptions(base_options= base_options,num_hands=1)
     detector = vision.HandLandmarker.create_from_options(options)
     img_loc = image_path+"_crop.jpg"
