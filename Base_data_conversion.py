@@ -49,16 +49,16 @@ def draw_landmarks_on_image(rgb_image, detection_result):
 # cv2.imshow("image",img)
 # cv2.waitKey(0)
 # cv2.imwrite("Cropped_ISL1.jpg",img)
-dir = "C:/Projects/ISL-to-text/0-9"
+dir = "C:/Projects/ISL-to-text/0-9/"
 
 for x in os.listdir(dir):
     image_path = dir+x+"/"+os.listdir(dir+x)[0]
     print(image_path)
     ima = os.listdir(dir+x)[0]
     img = cv2.imread(image_path)[40:1040,460:1460]
-    cv2.imshow("image",img)
-    cv2.waitKey(0)
-    cv2.imwrite(image_path+"_crop.jpg",img)
+    # cv2.imshow("image",img)
+    # cv2.waitKey(0)
+    # cv2.imwrite(image_path+"_crop.jpg",img)
     base_options = python.BaseOptions(model_asset_path= "C:/Projects/ISL-to-text/hand_landmarker.task")
     options = vision.HandLandmarkerOptions(base_options= base_options,num_hands=1)
     detector = vision.HandLandmarker.create_from_options(options)
@@ -66,21 +66,21 @@ for x in os.listdir(dir):
     image = image = mp.Image.create_from_file(img_loc)
     # image  = image[40:1040,460:1460]
     detection_result = detector.detect(image)
-
+    print(type(image))
     annotated_image,X,Y = draw_landmarks_on_image(image.numpy_view(), detection_result)
     cv2.imshow("image",annotated_image)
     cv2.waitKey(0)
-    cv2.imwrite(image_path + "_crop_marked.jpg",annotated_image)
+    # cv2.imwrite(image_path + "_crop_marked.jpg",annotated_image)
     
-    pos = []
-    for i in range(len(X)):
-      X[i] = X[i]*1000
-      Y[i] = Y[i]*1000
-      pos.append(X[i] + Y[i]*1000)
-    f = open(str(image_path+"XY.txt"),'a')
-    f.write(str(X))
-    f.write(str(Y))
-    f.close()
-    f = open(str(image_path+"posencoded.txt"),'a')
-    f.write(str(pos))
-    f.close()
+    # pos = []
+    # for i in range(len(X)):
+    #   X[i] = X[i]*1000
+    #   Y[i] = Y[i]*1000
+    #   pos.append(X[i] + Y[i]*1000)
+    # f = open(str(image_path+"XY.txt"),'w')
+    # f.write(str(X))
+    # f.write(str(Y))
+    # f.close()
+    # f = open(str(image_path+"posencoded.txt"),'w')
+    # f.write(str(pos))
+    # f.close()
