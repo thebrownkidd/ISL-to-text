@@ -9,7 +9,7 @@ from mediapipe.tasks.python import vision
 from mediapipe import solutions
 from mediapipe.framework.formats import landmark_pb2
 # This model failed
-sign_pred = tf.keras.models.load_model('C:/Projects/ISL-to-text/0-9/Models/temp.keras')
+sign_pred = tf.keras.models.load_model('C:/Projects/ISL-to-text/0-9/Models/42in_88acc.keras')
 MARGIN = 10 
 FONT_SIZE = 1
 FONT_THICKNESS = 1
