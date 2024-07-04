@@ -49,12 +49,12 @@ def draw_landmarks_on_image(rgb_image, detection_result):
 
 cap = cv2.VideoCapture(0)
 i = 0
-while cap.isOpened():
+def detect(image):
     Data = []
-    suc, image = cap.read()
+    # suc, image = cap.read()
     image = image[0:1920,0:1080]
-    if not suc:
-        continue
+    # if not suc:
+        # continue
     image = cv2.flip(image, 1)
     # cv2.imshow('image',image)
     # print(type(image))
@@ -74,6 +74,7 @@ while cap.isOpened():
         print(res)
     else:
         img = image.copy()
-    cv2.imshow('image',img)
-    if cv2.waitKey(5) & 0xFF == 27:
-        break
+    return res,img
+    # cv2.imshow('image',img)
+    # if cv2.waitKey(5) & 0xFF == 27:
+        # break
