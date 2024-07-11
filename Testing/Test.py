@@ -49,32 +49,33 @@ def draw_landmarks_on_image(rgb_image, detection_result):
 
 cap = cv2.VideoCapture(0)
 i = 0
-def detect(image):
-    Data = []
-    # suc, image = cap.read()
-    image = image[0:1920,0:1080]
-    # if not suc:
-        # continue
-    image = cv2.flip(image, 1)
-    # cv2.imshow('image',image)
-    # print(type(image))
-    base_options = python.BaseOptions(model_asset_path= "C:/Projects/ISL-to-text/hand_landmarker.task")
-    options = vision.HandLandmarkerOptions(base_options= base_options,num_hands=1)
-    detector = vision.HandLandmarker.create_from_options(options)
-    mp_image = mp.Image(image_format = mp.ImageFormat.SRGB, data=image)
-    result = detector.detect(mp_image)
-    if len(result.hand_landmarks) >0:
-        img,X,Y = draw_landmarks_on_image(mp_image.numpy_view(),result)
-        for i in range(len(X)):
-            Data.append((X[i])*1000)
-            Data.append((Y[i])*1000)
-        inp = pd.DataFrame(Data)
-        print(inp.shape)
-        res = sign_pred.predict(inp.T)
-        print(res)
-    else:
-        img = image.copy()
-    return res,img
-    # cv2.imshow('image',img)
-    # if cv2.waitKey(5) & 0xFF == 27:
-        # break
+# def detect(image):
+while cap.isOpened():
+  Data = []
+  suc, image = cap.read()
+  image = image[0:1920,0:1080]
+  if not suc:
+      continue
+  image = cv2.flip(image, 1)
+  # cv2.imshow('image',image)
+  # print(type(image))
+  base_options = python.BaseOptions(model_asset_path= "C:\Projects\ISL-to-text\INCLUDE 50\MP_Models\hand_landmarker.task")
+  options = vision.HandLandmarkerOptions(base_options= base_options,num_hands=2)
+  detector = vision.HandLandmarker.create_from_options(options)
+  mp_image = mp.Image(image_format = mp.ImageFormat.SRGB, data=image)
+  result = detector.detect(mp_image)
+  if len(result.hand_landmarks) >0:
+      img,X,Y = draw_landmarks_on_image(mp_image.numpy_view(),result)
+      # for i in range(len(X)):
+      #     Data.append((X[i])*1000)
+      #     Data.append((Y[i])*1000)
+      # inp = pd.DataFrame(Data)
+      # print(inp.shape)
+      # res = sign_pred.predict(inp.T)
+      # print(res)
+  else:
+      img = image.copy()
+  # return res,img
+  cv2.imshow('image',img)
+  if cv2.waitKey(5) & 0xFF == 27:
+      break
